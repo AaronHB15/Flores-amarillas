@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti 💛</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif}
+body{
+  overflow-x:hidden;
+  background:linear-gradient(180deg,#fff8cf 0%,#fff1a8 48%,#ffe27d 100%);
+  color:#4d3a00;
+}
+.page{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:28px 18px;position:relative;overflow:hidden;
+}
+.card{
+  width:min(680px,94vw);padding:42px 28px 34px;text-align:center;
+  background:rgba(255,255,255,.78);border:1px solid rgba(255,196,0,.35);
+  border-radius:28px;box-shadow:0 18px 60px rgba(112,82,0,.18);
+  backdrop-filter:blur(7px);position:relative;z-index:2;
+}
+.date{font:700 13px/1.2 Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;color:#a87500}
+h1{font-size:clamp(42px,10vw,76px);margin:12px 0 4px;color:#e3a900;text-shadow:0 3px 0 #fff}
+.subtitle{font-size:clamp(18px,4vw,25px);margin:0 auto 22px;max-width:560px;line-height:1.45}
+.bouquet{font-size:72px;line-height:1;margin:4px 0 22px;filter:drop-shadow(0 7px 8px rgba(118,85,0,.15))}
+.message{
+  font-size:20px;line-height:1.7;margin:0 auto 24px;max-width:570px;
+}
+.message b{color:#d59600}
+button{
+  border:0;border-radius:999px;padding:14px 25px;font-size:16px;font-weight:700;
+  background:#f5bd19;color:#fff;cursor:pointer;box-shadow:0 8px 20px rgba(190,139,0,.25);
+  transition:.2s transform,.2s box-shadow;
+}
+button:hover{transform:translateY(-2px);box-shadow:0 11px 24px rgba(190,139,0,.32)}
+.note{
+  max-height:0;opacity:0;overflow:hidden;transition:max-height .8s ease,opacity .5s ease;
+  font-size:18px;line-height:1.65;margin:0 auto;max-width:520px;
+}
+.note.open{max-height:300px;opacity:1;margin-top:22px}
+.flower{position:absolute;font-size:32px;opacity:.72;animation:float 7s ease-in-out infinite}
+.f1{left:5%;top:12%}.f2{right:6%;top:20%;animation-delay:1s}.f3{left:12%;bottom:15%;animation-delay:2s}.f4{right:12%;bottom:9%;animation-delay:3s}.f5{left:45%;top:3%;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-15px) rotate(7deg)}}
+.petal{
+  position:fixed;top:-40px;font-size:24px;pointer-events:none;z-index:3;
+  animation:fall linear forwards;
+}
+@keyframes fall{to{transform:translate3d(var(--x),110vh,0) rotate(520deg);opacity:.15}}
+.footer{margin-top:20px;font:13px Arial,sans-serif;color:#8c6b16}
+</style>
+</head>
+<body>
+<main class="page">
+  <span class="flower f1">🌻</span><span class="flower f2">🌼</span>
+  <span class="flower f3">🌻</span><span class="flower f4">🌼</span><span class="flower f5">🌻</span>
+  <section class="card">
+    <div class="date">21 de septiembre</div>
+    <h1>Flores amarillas 💛</h1>
+    <div class="bouquet">💐🌻🌼🌻💐</div>
+    <p class="subtitle">Porque hoy quería regalarte algo bonito… aunque ninguna flor sea tan bonita como tú.</p>
+    <p class="message">
+      Estas flores son para recordarte que <b>me haces feliz</b>, que me encanta tenerte en mi vida
+      y que cualquier día es un poquito mejor cuando estás tú.
+    </p>
+    <button id="btn">Tengo algo más para ti 💌</button>
+    <p id="note" class="note">
+      Si pudiera elegir una flor para cada momento bonito contigo, necesitaría un jardín entero. 🌻
+      <br><br><b>Feliz 21 de septiembre. 💛</b>
+    </p>
+    <div class="footer">Hecho especialmente para ti ✨</div>
+  </section>
+</main>
+<script>
+const btn=document.getElementById('btn'), note=document.getElementById('note');
+btn.addEventListener('click',()=>{
+  note.classList.toggle('open');
+  btn.textContent=note.classList.contains('open')?'💛 Para ti':'Tengo algo más para ti 💌';
+  if(note.classList.contains('open')) petals(22);
+});
+function petals(n){
+  for(let i=0;i<n;i++){
+    const p=document.createElement('div');
+    p.className='petal'; p.textContent=Math.random()>.5?'🌻':'🌼';
+    p.style.left=Math.random()*100+'vw';
+    p.style.setProperty('--x',(Math.random()*240-120)+'px');
+    p.style.animationDuration=(4+Math.random()*4)+'s';
+    p.style.animationDelay=(Math.random()*1.5)+'s';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),9000);
+  }
+}
+</script>
+</body>
+</html>
